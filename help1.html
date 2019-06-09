@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+     <title>Registration Form</title>
+     <link rel="stylesheet" a href="helpStyle1.css"/>
+   </head>
+
+   <body>
+     <div class="container">
+       <form id=form method="post">
+         <font face="monospace">
+           <p class="paragraph">Registration Form</p>
+             <div class="containerInput">
+               <input type="date" id="date" name="date" class="ipt">
+               <input type="text" step="any" id="location" name="location" placeholder="Location" class="ipt">
+               <br><br><br>
+               <input type="text" step="any" id="firstname" name="firstname" placeholder="First Name" class="ipt">
+               <input type="text" step="any" id="lastname" name="lastname" placeholder="Last Name" class="ipt">
+               <br><br><br>
+               <input type="text" step="any" name="item" id="item" placeholder="Item Needed" class="ipt">
+               <br><br><br>
+               <input type="submit" value="Submit" class="button" onclick="addtoDB()">
+             </div>
+           </font>
+       </form>
+
+       <p id=submitted></p>
+
+       <script>
+       function addtoDB() {
+         var xhttp;
+         xhttp = new XMLHttpRequest();
+         xhttp.onreadystatechange = function() {
+           if (xhttp.readyState == 4 && xhttp.status == 200) {
+               document.getElementById("submitted").innerHTML = "form submitted";
+           }
+         };
+          var date = document.getElementById('date').value;
+          var loc = document.getElementById('location').value;
+          var firstname = document.getElementById('firstname').value;
+          var lastname = document.getElementById('lastname').value;
+          var item = document.getElementById('item').value;
+          //these variables names match with my column names in my db
+
+         var queryString = "?date=" + date + "&location=" + loc + "&firstname=" + firstname + "&lastname=" + lastname + "&item=" + item;
+          console.log(queryString);
+          xhttp.open("GET", "helpform.php" + queryString, true); //insert my php file
+          xhttp.send(null);
+       }
+
+       </script>
+
+     </div>
+   </body>
+   </html>
